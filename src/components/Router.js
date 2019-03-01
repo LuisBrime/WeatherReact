@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Index from '../pages/Index';
-import Weather from '../pages/Weather';
+import Home from './Home';
+import Country from './Country';
 
 const Main = () => (
     <main>
         <Switch>
-            <Route exact path='/' component={Index} />
-            <Route path='/weather' component={Weather} />
+            <Route exact path='/' component={Home} />
+            <Route path='/weather' component={Country} />
         </Switch>
     </main>
 )
