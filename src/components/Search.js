@@ -39,9 +39,36 @@ const styles = theme => ({
         width: '100%',
         marginTop: theme.spacing.unit,
     },
-  });
+});
 
-class Index extends React.Component {
+class Search extends React.Component {
+    constructor(props, {match}) {
+        super(props);
+        
+        this.state = { city: '' };
+
+        console.log(this.props);
+        if (this.props.match) {
+            if (this.props.match.params.id) {
+                this.state = { city: this.props.match.params.id };
+            }
+        } 
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+
+        console.log(this.state);
+    }
+
+    handleSubmit (event) {
+        event.preventDefault();
+        alert('Ciudad :' + this.state.city);
+    }
+
+    handleChange (event) {
+        this.setState({city: event.target.value});
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -55,10 +82,10 @@ class Index extends React.Component {
                     <Typography component="h1" variant="h5">
                         Weather In Your City
                     </Typography>
-                    <form className={classes.form}>
+                    <form className={classes.form} onSubmit={this.handleSubmit}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="text">Ingress the City</InputLabel>
-                            <Input id="city" name="city" autoFocus />
+                            <Input id="city" onChange={this.handleChange} autoFocus />
                         </FormControl>
                         <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                             Search
@@ -70,8 +97,8 @@ class Index extends React.Component {
     }
 }
 
-Index.propTypes = {
+Search.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(Index));
+export default withRoot(withStyles(styles)(Search));
