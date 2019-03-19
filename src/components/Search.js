@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from '../withRoot';
+import WeatherActions from '../actions/WeatherActions';
 
 const styles = theme => ({
     main: {
@@ -62,7 +63,8 @@ class Search extends React.Component {
 
     handleSubmit (event) {
         event.preventDefault();
-        alert('Ciudad :' + this.state.city);
+        //alert('Ciudad :' + this.state.city);
+        WeatherActions.changeCity(this.state.city);
     }
 
     handleChange (event) {

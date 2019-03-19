@@ -11,6 +11,13 @@ class WeatherActions {
            } 
         });
     }
+
+    changeCity(newCity) {
+        Dispatcher.dispatch({
+            actionType: ActionTypes.CHANGE_CITY,
+            payload: newCity
+        });
+    }
 }
 
 export default new WeatherActions();

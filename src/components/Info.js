@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from '../withRoot';
 import WeatherActions from '../actions/WeatherActions';
+import WeatherStore from '../stores/WeatherStore';
 
 
 const styles = theme => ({
@@ -32,10 +34,27 @@ const styles = theme => ({
 class Info extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            city: WeatherStore.getCity()
+        };
+
+        this._onChange = this._onChange.bind(this);
     }
 
     _remoto(event) {
         WeatherActions.remoto();
+    }
+
+    _onChange() {
+        this.setState({ city: WeatherStore.getCity() });
+    }
+
+    componentWillMount() {
+        WeatherStore.addChangeListener(this._onChange);
+    }
+
+    componentWillUnmount() {
+        WeatherStore.removeChangeListener(this._onChange);
     }
 
     render() {
@@ -47,6 +66,9 @@ class Info extends React.Component {
                     <Button variant="contained" component="span" onClick={this._remoto.bind(this)}>
                         Remote
                     </Button>
+                    <Typography component="h1" variant="h5">
+                        {WeatherStore.getCity()}
+                    </Typography>
                 </Paper>
             </div>
         );
