@@ -5,7 +5,7 @@ import RemoteAPI from '../utils';
 class WeatherActions {
     remoto() {
         Dispatcher.dispatch({
-           actionType: ActionTypes.INITIALISE,
+           actionType: ActionTypes.API_CALL,
            initialData: {
                bill: RemoteAPI.get()
            } 

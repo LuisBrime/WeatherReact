@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import  Dispatcher from '../dispatchers';
 
 let city = "";
+let cityWeather = {};
 
 class WeatherStore extends EventEmitter {
     constructor() {
@@ -17,6 +18,8 @@ class WeatherStore extends EventEmitter {
             case 'CHANGE_CITY':
                 this.changeCity(action.payload);
                 break;
+            case 'API_CALL':
+                this.apiCall(action.initialData.bill);
         }
     }
 
@@ -35,6 +38,15 @@ class WeatherStore extends EventEmitter {
 
     getCity() {
         return city;
+    }
+
+    apiCall(data) {
+        cityWeather = data;
+        this.emit('CAMBIO');
+    }
+
+    getData() {
+        return cityWeather;
     }
 }
 

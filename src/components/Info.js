@@ -35,7 +35,8 @@ class Info extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            city: WeatherStore.getCity()
+            city: WeatherStore.getCity(),
+            weather: WeatherStore.getData()
         };
 
         this._onChange = this._onChange.bind(this);
@@ -46,7 +47,7 @@ class Info extends React.Component {
     }
 
     _onChange() {
-        this.setState({ city: WeatherStore.getCity() });
+        this.setState({ city: WeatherStore.getCity(), weather: WeatherStore.getData() });
     }
 
     componentWillMount() {
@@ -67,7 +68,10 @@ class Info extends React.Component {
                         Remote
                     </Button>
                     <Typography component="h1" variant="h5">
-                        {WeatherStore.getCity()}
+                        {this.state.city}
+                    </Typography>
+                    <Typography component="h2" variant="h5">
+                        Humidity = 
                     </Typography>
                 </Paper>
             </div>
