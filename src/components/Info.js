@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from '../withRoot';
-//import WeatherActions from '../actions/WeatherActions';
+import WeatherActions from '../actions/WeatherActions';
 import WeatherStore from '../stores/WeatherStore';
 
 
@@ -80,17 +80,14 @@ class Info extends React.Component {
 
     componentWillMount() {
         WeatherStore.addChangeListener(this._onChange);
-        var aux = WeatherStore.getData();
-        this.setState({
-            city: WeatherStore.getCity(),
-            weather: {
-                humidity: aux.humidity,
-                pressure: aux.pressure,
-                temp: aux.temp,
-                temp_max: aux.temp_max,
-                temp_min: aux.temp_min
-            }
-        });
+        //console.log(this.props);
+        var aux = ""
+        if (this.props.match.params.id) {
+            aux = this.props.match.params.id;
+            //console.log(aux);
+            WeatherActions.changeCity(aux); 
+            WeatherActions.remoto(aux);
+        }
     }
 
     componentWillUnmount() {
