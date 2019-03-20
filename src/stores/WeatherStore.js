@@ -19,7 +19,13 @@ class WeatherStore extends EventEmitter {
                 this.changeCity(action.payload);
                 break;
             case 'API_CALL':
-                this.apiCall(action.initialData.bill);
+                this.apiCall();
+                break;
+            case 'API_RETURN':
+                this.apiReturn(action.payload);
+                break;
+            default:
+                return true;
         }
     }
 
@@ -40,7 +46,11 @@ class WeatherStore extends EventEmitter {
         return city;
     }
 
-    apiCall(data) {
+    apiCall() {
+        console.log('API was called');
+    }
+
+    apiReturn(data) {
         cityWeather = data;
         this.emit('CAMBIO');
     }

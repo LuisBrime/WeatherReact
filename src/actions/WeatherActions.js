@@ -3,19 +3,25 @@ import ActionTypes from '../constants';
 import RemoteAPI from '../utils';
 
 class WeatherActions {
-    remoto() {
+    remoto(city) {
         Dispatcher.dispatch({
            actionType: ActionTypes.API_CALL,
-           initialData: {
-               bill: RemoteAPI.get()
-           } 
         });
+
+        RemoteAPI.get(city);
     }
 
     changeCity(newCity) {
         Dispatcher.dispatch({
             actionType: ActionTypes.CHANGE_CITY,
             payload: newCity
+        });
+    }
+
+    receive(data) {
+        Dispatcher.dispatch({
+            actionType: ActionTypes.API_RETURN,
+            payload: data
         });
     }
 }

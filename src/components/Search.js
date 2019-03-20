@@ -65,6 +65,7 @@ class Search extends React.Component {
         event.preventDefault();
         //alert('Ciudad :' + this.state.city);
         WeatherActions.changeCity(this.state.city);
+        WeatherActions.remoto(this.state.city);
     }
 
     handleChange (event) {

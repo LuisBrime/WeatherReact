@@ -3,4 +3,5 @@ export default {
     INITIALISE: 'INITIALISE',
     CHANGE_CITY: 'CHANGE_CITY',
     API_CALL: 'API_CALL',
+    API_RETURN: 'API_RETURN'
 }
