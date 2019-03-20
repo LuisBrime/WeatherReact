@@ -97,11 +97,6 @@ class Info extends React.Component {
         WeatherStore.removeChangeListener(this._onChange);
     }
 
-    _convertToC(k) {
-        if (k) return parseFloat(Math.round((k - 273.15)*100) / 100).toFixed(2);
-        else return "";
-    }
-
     render() {
         const { classes } = this.props;
         return(
@@ -130,15 +125,15 @@ class Info extends React.Component {
                             </TableRow>
                             <TableRow>
                                 <TableCell>Temperature</TableCell>
-                                <TableCell>{this._convertToC(this.state.weather.temp)}ºC</TableCell>
+                                <TableCell>{this.state.weather.temp}ºC</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Max Temperature</TableCell>
-                                <TableCell>{this._convertToC(this.state.weather.temp_max)}ºC</TableCell>
+                                <TableCell>{this.state.weather.temp_max}ºC</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Min Temperature</TableCell>
-                                <TableCell>{this._convertToC(this.state.weather.temp_min)}ºC</TableCell>
+                                <TableCell>{this.state.weather.temp_min}ºC</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

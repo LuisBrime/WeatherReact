@@ -5,7 +5,7 @@ var request = require('superagent');
 
 var RemoteAPI = {
     get: (city) => {
-        request.get('https://api.openweathermap.org/data/2.5/weather?q='+ city +'&APPID=' +  Constants.APP_ID)
+        request.get('https://api.openweathermap.org/data/2.5/weather?q='+ city +'&APPID=' +  Constants.APP_ID + '&units=metric')
         .set('Accept', 'application/json')
         .end((err, response) => {
             if (err) return console.error(err);
