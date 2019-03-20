@@ -48,7 +48,7 @@ class Search extends React.Component {
         
         this.state = { city: '' };
 
-        console.log(this.props);
+        //console.log(this.props);
         if (this.props.match) {
             if (this.props.match.params.id) {
                 this.state = { city: this.props.match.params.id };
@@ -58,7 +58,7 @@ class Search extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
 
-        console.log(this.state);
+        //console.log(this.state);
     }
 
     handleSubmit (event) {

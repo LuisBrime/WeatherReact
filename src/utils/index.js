@@ -10,7 +10,7 @@ var RemoteAPI = {
         .end((err, response) => {
             if (err) return console.error(err);
 
-            //console.log(response.body);
+            console.log(response.body);
             var payload = {};
             payload.humidity = response.body.main.humidity;
             payload.pressure = response.body.main.pressure;

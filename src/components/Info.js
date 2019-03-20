@@ -8,6 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from '../withRoot';
 //import WeatherActions from '../actions/WeatherActions';
@@ -34,7 +35,14 @@ const styles = theme => ({
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     },
     table: {
-        minWidth: 400,
+        minWidth: 200,
+        margin: theme.spacing.unit,
+    },
+    head: {
+        backgroundColor: theme.palette.primary.main,
+    },
+    body: {
+        fontSize: 14,
     },
 });
 
@@ -57,7 +65,7 @@ class Info extends React.Component {
 
     _onChange() {
         var aux = WeatherStore.getData();
-        console.log(aux);
+        //console.log(aux);
         this.setState({
             city: WeatherStore.getCity(),
             weather: {
@@ -89,6 +97,11 @@ class Info extends React.Component {
         WeatherStore.removeChangeListener(this._onChange);
     }
 
+    _convertToC(k) {
+        if (k) return parseFloat(Math.round((k - 273.15)*100) / 100).toFixed(2);
+        else return "";
+    }
+
     render() {
         const { classes } = this.props;
         return(
@@ -98,33 +111,34 @@ class Info extends React.Component {
                     <Typography component="h1" variant="h5">
                         {this.state.city}
                     </Typography>
-                    <Table>
-                        <TableHead>
+                    <Divider variant="middle" />
+                    <Table className={classes.table}>
+                        <TableHead className={classes.head}>
                             <TableRow>
                                 <TableCell>Weather</TableCell>
                                 <TableCell>Value</TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
+                        <TableBody className={classes.body}>
                             <TableRow>
                                 <TableCell>Humidity</TableCell>
-                                <TableCell>{this.state.weather.humidity}</TableCell>
+                                <TableCell>{this.state.weather.humidity}%</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Pressure</TableCell>
-                                <TableCell>{this.state.weather.pressure}</TableCell>
+                                <TableCell>{this.state.weather.pressure} hpa</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Temperature</TableCell>
-                                <TableCell>{this.state.weather.temp}</TableCell>
+                                <TableCell>{this._convertToC(this.state.weather.temp)}ºC</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Max Temperature</TableCell>
-                                <TableCell>{this.state.weather.temp_max}</TableCell>
+                                <TableCell>{this._convertToC(this.state.weather.temp_max)}ºC</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Min Temperature</TableCell>
-                                <TableCell>{this.state.weather.temp_min}</TableCell>
+                                <TableCell>{this._convertToC(this.state.weather.temp_min)}ºC</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
